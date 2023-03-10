@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>세붕이 공모전</title>
+    <link rel="icon" href="https://sebuung.s3.ap-northeast-2.amazonaws.com/Sebuunglogo_nonebackground.png" type="image/x-icon">
+    <style>
+
+
+body {
+    background-color: #F9A602;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 3rem;
+    color: #fff;
+    text-align: center;
+    margin-top: 100px;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #F9A602;
+    border: none;
+    border-radius: 5px;
+    margin-top: 30px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #F9A602;
+    color: #fff;
+}
+
+#file-upload-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+#file-upload-form label,
+#file-upload-form button[type="submit"] {
+    margin: 0 10px;
+    padding: 10px 20px; /* 추가 */
+}
+
+#file-upload-form button[type="submit"] {
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #F9A602;
+    cursor: pointer;
+}
+
+#file-upload-form button[type="submit"]:hover {
+    background-color: #F9A602;
+    color: #fff;
+}
+.custom-file-upload {
+    border: 2px solid #fff;
+    color: #fff;
+    display: inline-block;
+    padding: 6px 15px; /* 추가 */
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #fff;
+    color: #F9A602;
+}   
+
+.custom-file-upload:hover {
+    background-color: #F9A602;
+    color: #fff;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+    </style>
+</head>
+<body>
+    <h1>세붕이 공모전 웹페이지에 오신 것을 환영합니다!</h1>
+    <p>아래 버튼을 눌러 공모전종류_이름과 같은 형식으로 파일을 제출해주세요 </p>
+    
+    <center>
+        <form action='/upload' method='post' enctype='multipart/form-data'>
+            <label for="file-input" class="custom-file-upload">파일 선택</label>
+            <input id="file-input" type="file" name="file">
+            <input type='submit' value='제출하기' id="submit-btn"  class="btn">
+        
+        </form>
+    </center>
+</body>
+<script>
+    const fileInput = document.getElementById("file-input");
+    const fileLabel = document.querySelector('label[for="file-input"]');
+
+    fileInput.addEventListener('change', function() {
+        if (fileInput.value) {
+            fileLabel.innerHTML = fileInput.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+        } else {
+            fileLabel.innerHTML = 'Choose File';
+        }
+    });
+</script>
+
+</html>
