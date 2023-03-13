@@ -30,7 +30,7 @@ func fileUpload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer f.Close()
-
+	config, err := LoadConfig()
 	io.Copy(f, file)
 	cfg, err := config.LoadDefaultConfig(context.TODO(),  config.WithRegion(config.REGION))
 	if err != nil {
@@ -43,7 +43,7 @@ func fileUpload(w http.ResponseWriter, r *http.Request) {
 	fileByte, err := ioutil.ReadFile("./files/" + handler.Filename)
 	filebody := bytes.NewReader(fileByte)
 	uploader := manager.NewUploader(client)
-	config, err := LoadConfig()
+	
 	result, err := uploader.Upload(context.TODO(), &s3.PutObjectInput{
 		Bucket: aws.String(config.BUCKET_NAME),
 		Key:    aws.String(handler.Filename),
