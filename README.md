@@ -17,7 +17,6 @@ Save the S3 Bucket Name where the file will be stored in config.json of repo.
 After receiving the repository with git clone, execute it as follows.
 
 ```jsx
-go mod init Sebuung-Competition-Web
 go build .
 chmod +x Sebuung-Competition-Web
 ./Sebuung-Competition-Web

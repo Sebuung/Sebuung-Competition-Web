@@ -32,11 +32,13 @@ func fileUpload(w http.ResponseWriter, r *http.Request) {
 	defer f.Close()
 
 	io.Copy(f, file)
-	cfg, err := config.LoadDefaultConfig(context.TODO())
+	cfg, err := config.LoadDefaultConfig(context.TODO(),  config.WithRegion(config.REGION))
 	if err != nil {
 		fmt.Println(err)
 	}
 	
+	// local storage에 저장하시려면 해당 부분을 없애주세요 --	
+
 	client := s3.NewFromConfig(cfg)
 	fileByte, err := ioutil.ReadFile("./files/" + handler.Filename)
 	filebody := bytes.NewReader(fileByte)
@@ -52,6 +54,15 @@ func fileUpload(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(result)
 	}
 
+	
+	
+	err3 := os.Remove("./files/" + handler.Filename)
+
+	if err3 != nil:
+		fmt.Println(err3)
+
+	// ------------------------------------------------------
+	
 	fmt.Fprintf(w, `<script>
 	alert('%v이 성공적으로 제출되셨습니다, 수고하셨습니다!')
 	location.href = '/'

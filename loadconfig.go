@@ -8,6 +8,7 @@ import (
 
 type s3_config struct {
 	BUCKET_NAME string `json: "BUCKET_NAME"`
+	REGION string `json: "REGION"`
 }
 
 func LoadConfig() (s3_config, error){
